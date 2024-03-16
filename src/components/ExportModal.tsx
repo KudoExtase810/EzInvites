@@ -1,18 +1,13 @@
 import { MdClose } from "react-icons/md";
 import { usePeople } from "../hooks/usePeople";
 import toast from "react-hot-toast";
+import copy from "copy-to-clipboard";
 
 const ExportModal = () => {
     const { people } = usePeople();
     const dataString = JSON.stringify(people, null, 2);
     const copyData = () => {
-        navigator.clipboard
-            .writeText(dataString)
-            .then(() => toast.success("Copied!"))
-            .catch((err) => {
-                toast.error("Error copying data! Check console for more info.");
-                console.log(err);
-            });
+        copy(dataString, { onCopy: () => toast.success("Copied!") });
     };
 
     return (
