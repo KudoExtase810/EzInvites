@@ -1,15 +1,9 @@
 import { MdClose } from "react-icons/md";
 import { usePeople } from "../hooks/usePeople";
-import toast from "react-hot-toast";
-import copy from "copy-text-to-clipboard";
 
 const ExportModal = () => {
     const { people } = usePeople();
     const dataString = JSON.stringify(people, null, 2);
-    const copyData = () => {
-        copy(dataString);
-        toast.success("Copied!");
-    };
 
     return (
         <dialog className="modal max-sm:modal-bottom" id="export_modal">
@@ -28,9 +22,6 @@ const ExportModal = () => {
                     <span className="text-lg">({people.length} people)</span>
                 </h2>
                 <pre className="max-h-64">{dataString}</pre>
-                <button onClick={copyData} className="btn btn-success w-full">
-                    Copy
-                </button>
             </div>
         </dialog>
     );
